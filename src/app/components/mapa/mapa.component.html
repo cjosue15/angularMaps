@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>{{ title }}</mat-card-title>
+
+  <mat-card-content>
+    <agm-map
+      *ngIf="marcadores"
+      (mapClick)="addMarket($event)"
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="17"
+    >
+      <agm-marker
+        *ngFor="let m of marcadores"
+        [latitude]="m.lat"
+        [longitude]="m.lng"
+      >
+        <agm-info-window>
+          <strong>{{ m.title }}</strong>
+          <p>
+            {{ m.desc }}
+          </p>
+          <div>
+            <button mat-raised-button color="primary">Edit</button>
+            <button mat-raised-button color="warn">Delete</button>
+          </div>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </mat-card-content>
+</mat-card>
+
+{{ marcadores[0] | json }}
